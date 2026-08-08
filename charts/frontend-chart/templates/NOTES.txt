@@ -46,3 +46,17 @@
 _____________________________________________________________________________________________________________________________________________________
 #  to install Helm
 # sudo snap install helm --classic
+
+-----------------------------------------------
+1. Rollback to the Immediate Previous Version (Safest & Easiest)If you just deployed a broken 
+version and want to go back exactly one step, you do not actually need a number. 
+Helm has a built-in feature for this:bash
+helm rollback "$SERVICE_NAME" 0
+Use code with caution. How it works: Passing 0 tells Helm to automatically look up the previous 
+revision and roll back to it.
+2. Dynamically Target the Second-to-Last RevisionIf you want to bypass the current broken version 
+and go back to the version before that, you can use this dynamic pipeline:bash
+helm rollback "$SERVICE_NAME" $(helm history "$SERVICE_NAME" --output json | jq '.[-2].revision')
+helm history ... --output json: Outputs the history in clean JSON format.
+jq '.[-2].revision': Grabs the second-to-last item from the history array and extracts its 
+revision number.

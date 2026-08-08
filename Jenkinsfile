@@ -11,7 +11,7 @@ pipeline {
 
         AWS_REGION = 'ap-south-1'
 
-        ACCOUNT_ID = credentials('aws-account-id')
+        ACCOUNT_ID = '582983022960'
 
         REPOSITORY = 'frontend'
 
@@ -147,8 +147,7 @@ pipeline {
 
             sh """
 
-            kubectl rollout undo deployment/${SERVICE_NAME} \
-            -n ${K8S_NAMESPACE} || true
+            helm rollback ${SERVICE_NAME} 0
 
             """
 
