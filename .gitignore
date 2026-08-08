@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# custom file for learning purposes
+K8S/
+charts/frontend/templates/NOTES.txt
